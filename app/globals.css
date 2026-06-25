@@ -383,7 +383,9 @@ h1 {
 /* Wallet connect button + modal (override adapter defaults to match theme) */
 .wallet-adapter-button-trigger {
   background: linear-gradient(135deg, var(--brand), var(--brand-2)) !important;
+  width: auto !important;
   height: 38px !important;
+  margin-top: 0 !important;
   padding: 0 18px !important;
   font-size: 14px !important;
   font-weight: 600 !important;
@@ -425,17 +427,29 @@ h1 {
   padding: 56px 48px 22px !important;
 }
 .wallet-adapter-modal-button-close {
+  position: absolute !important;
+  width: 34px !important;
+  height: 34px !important;
+  top: 16px !important;
+  right: 16px !important;
+  left: auto !important;
+  margin-top: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   background: var(--panel-2) !important;
   border-radius: 50% !important;
-  top: 18px !important;
-  right: 18px !important;
-  padding: 9px !important;
+  box-shadow: none !important;
   transition: background 0.15s ease !important;
 }
 .wallet-adapter-modal-button-close:hover {
   background: var(--line) !important;
+  filter: none !important;
 }
 .wallet-adapter-modal-button-close svg {
+  width: 13px !important;
+  height: 13px !important;
   fill: var(--muted) !important;
 }
 .wallet-adapter-modal-list {
@@ -452,7 +466,9 @@ h1 {
   font-size: 15px !important;
   font-weight: 600 !important;
   color: var(--text) !important;
+  width: 100% !important;
   height: 54px !important;
+  margin-top: 0 !important;
   padding: 0 18px !important;
   transition: border-color 0.15s ease, background 0.15s ease !important;
 }
