@@ -8,9 +8,9 @@ Built with **Next.js (App Router)**, **Upstash Redis** for storage, and
 **Solana** for payments. No custom smart contract — the backend handles escrow,
 matchmaking, and settlement, and token transfers go through `@solana/web3.js`.
 
-> Status: **text (LLM) workloads only** for now via Ollama. Image generation is
-> planned. The on-chain payment path is fully built but requires a deployed QST
-> token + funded wallet to go live (see [Going live](#going-live)).
+> Status: **text (LLM) workloads** via Ollama. The on-chain payment path is fully
+> built but requires a deployed QST token + funded wallet to go live
+> (see [Going live](#going-live)).
 
 ---
 
@@ -61,9 +61,9 @@ npm run dev
 
 Open http://localhost:3000.
 
-Without Upstash/Solana env vars, the app runs in a **local dev mode**: data is
-kept in memory (resets on restart) and on-chain payouts are disabled. Set the
-env vars (below) to enable persistence and real payments.
+Without configuration, the app runs in a **local dev mode**: data is kept in
+memory (resets on restart) and on-chain payouts are disabled. Fill in the values
+listed in `.env.example` to enable persistence and real payments.
 
 ---
 
@@ -97,29 +97,21 @@ dependencies** — just Node 18+.
 
 ---
 
-## Environment variables
+## Configuration
 
-Copy `.env.example` to `.env.local` (local) or add these in your Vercel project.
+All configuration is done through environment variables. Copy `.env.example` to
+`.env.local` for local dev, or add the same values in your host's project
+settings. See `.env.example` for the full list and what each value is for.
 
-| Variable | Required | Purpose |
-|---|---|---|
-| `UPSTASH_REDIS_REST_URL` | yes | Persistent storage |
-| `UPSTASH_REDIS_REST_TOKEN` | yes | Persistent storage |
-| `SOLANA_RPC_URL` | for payments | Server-side RPC (e.g. Helius) for payouts/burns |
-| `TOKEN_MINT` | for payments | The QST SPL mint address |
-| `PLATFORM_WALLET_SECRET` | for payments | Escrow wallet secret key (JSON array) |
-| `NEXT_PUBLIC_SOLANA_RPC_URL` | for payments | **Public** RPC the browser uses to send the deposit (do not use a secret key here) |
-| `CRON_SECRET` | optional | Bearer token protecting the auto-settle endpoint |
-
-Until the three payment vars are set, settlement returns "payouts not
-configured" instead of moving funds.
+Until payments are configured, settlement returns "payouts not configured"
+instead of moving funds — everything else still works.
 
 ---
 
 ## Deploy to Vercel
 
 1. Import the repo into Vercel (Next.js is auto-detected).
-2. Add the environment variables above.
+2. Add your configuration (see `.env.example`).
 3. Deploy. `vercel.json` registers a cron that auto-settles jobs at their
    deadline (frequent crons require a Vercel Pro plan; the manual settle button
    is the fallback otherwise).
@@ -130,9 +122,9 @@ configured" instead of moving funds.
 
 The payment code is complete but only fires once real tokens exist:
 
-1. **Create the QST token** (an SPL mint) and set `TOKEN_MINT`.
-2. **Fund the escrow wallet** with **SOL** (for transaction fees).
-3. Set `SOLANA_RPC_URL`, `PLATFORM_WALLET_SECRET`, and `NEXT_PUBLIC_SOLANA_RPC_URL`.
+1. **Create the QST token** (an SPL mint).
+2. **Fund the escrow wallet** with SOL (for transaction fees).
+3. Add the required configuration in your host (see `.env.example`).
 4. Do a **tiny test bounty** first to validate the full deposit → settle → burn
    path before opening it up.
 
@@ -166,8 +158,6 @@ agent/
 
 ## Roadmap
 
-- [ ] Image generation workloads
 - [ ] Hardening: rate limiting, input limits, anti-sybil
 - [ ] Stronger verification (TEE attestation / proofs)
-- [ ] Image/file result delivery via object storage
 ```
