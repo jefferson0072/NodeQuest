@@ -76,10 +76,14 @@ assigns your tier), polls for matching jobs, runs them, and submits results.
    ```bash
    ollama pull llama3.1:8b
    ```
-2. Download the agent from the site (`/bounty-agent.mjs`) or this repo.
-3. Run it, pointing at the deployed app:
+2. Clone this repo:
    ```bash
-   node bounty-agent.mjs --name my-rig --wallet <your-solana-address> --server https://your-app.vercel.app
+   git clone https://github.com/jefferson0072/nodequest.git
+   cd nodequest
+   ```
+3. Run the agent, pointing at the deployed app:
+   ```bash
+   node agent/bounty-agent.mjs --name my-rig --wallet <your-solana-address> --server https://your-app.vercel.app
    ```
 
 Useful flags: `--gpu "RTX 3090"` / `--vram 24` (override detection),
@@ -151,7 +155,7 @@ lib/
   tiers.js                GPU + workload tier catalogs
   reputation.js           Provider reputation
 agent/
-  bounty-agent.mjs        Provider CLI agent (also served at /bounty-agent.mjs)
+  bounty-agent.mjs        Provider CLI agent (clone the repo to run it)
 ```
 
 ---
