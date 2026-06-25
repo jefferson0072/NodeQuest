@@ -17,6 +17,16 @@ export async function GET() {
     getPlatformAddress(),
     getMintDecimals(),
   ]);
+  // If the wallet secret or mint can't be read, payments aren't actually usable.
+  // Report it cleanly instead of pretending it's ready (or 500-ing).
+  if (!escrowWallet || decimals == null) {
+    return NextResponse.json({
+      paymentsReady: false,
+      error: !escrowWallet
+        ? "PLATFORM_WALLET_SECRET is invalid (must be a JSON array of 64 numbers)"
+        : "Could not read TOKEN_MINT from SOLANA_RPC_URL (check the mint address and RPC)",
+    });
+  }
   return NextResponse.json({
     paymentsReady: true,
     tokenMint: process.env.TOKEN_MINT,
