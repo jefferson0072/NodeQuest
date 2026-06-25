@@ -92,6 +92,26 @@ a {
   font-weight: 600;
 }
 
+.nav .nav-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 999px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  background: transparent;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.nav .nav-icon:hover {
+  color: var(--text);
+  border-color: var(--brand);
+  background: rgba(132, 90, 233, 0.14);
+}
+
 .pill {
   border: 1px solid #3a315d;
   background: #171427;

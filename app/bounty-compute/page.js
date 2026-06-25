@@ -163,6 +163,34 @@ function Dashboard() {
         </Link>
         <nav className="nav">
           <Link href="/how-it-works">How it works</Link>
+          <a
+            href="https://x.com/nodequestlol"
+            target="_blank"
+            rel="noreferrer"
+            className="nav-icon"
+            aria-label="NodeQuest on X"
+          >
+            <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+              />
+            </svg>
+          </a>
+          <a
+            href="https://github.com/jefferson0072/nodequest"
+            target="_blank"
+            rel="noreferrer"
+            className="nav-icon"
+            aria-label="NodeQuest on GitHub"
+          >
+            <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M12 .5C5.73.5.5 5.73.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.79 2.73 1.27 3.4.97.1-.76.41-1.27.74-1.56-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.25 5.69.42.36.79 1.08.79 2.18v3.23c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"
+              />
+            </svg>
+          </a>
           {paymentsReady && <WalletMultiButton />}
         </nav>
       </header>
@@ -329,12 +357,17 @@ function Dashboard() {
               Image generation support is coming soon.
             </div>
 
-            <div className="runtime-head">Then run the agent</div>
+            <div className="runtime-head">Then clone the repo &amp; run the agent</div>
             <pre className="code-snippet">
-node bounty-agent.mjs \{"\n"}  --name my-rig \{"\n"}  --wallet YOUR_SOLANA_ADDRESS \{"\n"}  --server {origin}
+git clone https://github.com/jefferson0072/nodequest.git{"\n"}cd nodequest{"\n"}node agent/bounty-agent.mjs \{"\n"}  --name my-rig \{"\n"}  --wallet YOUR_SOLANA_ADDRESS \{"\n"}  --server {origin}
             </pre>
-            <a className="agent-download" href="/bounty-agent.mjs" download>
-              Download agent ↓
+            <a
+              className="agent-download"
+              href="https://github.com/jefferson0072/nodequest"
+              target="_blank"
+              rel="noreferrer"
+            >
+              View on GitHub ↗
             </a>
           </article>
         </section>
