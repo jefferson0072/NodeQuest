@@ -239,6 +239,9 @@ function Dashboard() {
                     </div>
                     <div className="meta">
                       {p.gpuModel} · {p.vramGb}GB · {p.wins} wins · {p.earned} QST
+                      {p.gpuRawName && p.gpuRawName !== p.gpuModel && (
+                        <> · detected: {p.gpuRawName}</>
+                      )}
                     </div>
                   </div>
                   <RepDots rep={p.reputation} />

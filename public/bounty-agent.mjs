@@ -13,13 +13,10 @@
  *
  * Usage:
  *   node agent/bounty-agent.mjs --name my-rig --wallet <solana-address>
- *   node agent/bounty-agent.mjs --name my-rig --gpu "RTX 3060" --wallet <addr>
  *
  * Options:
  *   --name    machine name (required)
  *   --wallet  Solana address that receives QST (required for real payouts)
- *   --gpu     GPU model to report (must match the platform catalog); optional
- *   --vram    VRAM in GB, used if the GPU isn't in the catalog; optional
  *   --server  backend URL (default http://localhost:3000)
  *   --ollama  Ollama base URL (default http://localhost:11434)
  *   --model   override the Ollama model for text jobs
@@ -97,13 +94,6 @@ function detectGpu() {
   }
 }
 
-// Map a detected GPU name to a platform catalog key (e.g. "RTX 3060").
-function matchCatalog(rawName, catalog) {
-  if (!rawName) return null;
-  const keys = Object.keys(catalog || {});
-  return keys.find((k) => rawName.toUpperCase().includes(k.toUpperCase())) || null;
-}
-
 function hashOf(text) {
   return "0x" + crypto.createHash("sha256").update(text).digest("hex").slice(0, 32);
 }
@@ -160,24 +150,22 @@ const done = new Set();
 const skipped = new Set();
 
 async function register() {
-  const { catalog } = await api("/api/providers");
-  let gpuModel = args.gpu || null;
-  let vramGb = args.vram ? Number(args.vram) : undefined;
-
-  if (!gpuModel) {
-    const detected = detectGpu();
-    if (detected) {
-      gpuModel = matchCatalog(detected.rawName, catalog);
-      vramGb = vramGb ?? detected.vram;
-      log(`Detected GPU: ${detected.rawName} (${detected.vram}GB)`);
-    } else {
-      log("No NVIDIA GPU detected (nvidia-smi unavailable).");
-    }
+  const detected = detectGpu();
+  if (!detected) {
+    console.error("Error: no NVIDIA GPU detected (nvidia-smi unavailable)");
+    process.exit(1);
   }
+
+  log(`Detected GPU: ${detected.rawName} (${detected.vram}GB)`);
 
   const reg = await api("/api/providers", {
     method: "POST",
-    body: JSON.stringify({ name: NAME, gpuModel, vramGb, wallet: WALLET }),
+    body: JSON.stringify({
+      name: NAME,
+      gpuRawName: detected.rawName,
+      vramGb: detected.vram,
+      wallet: WALLET,
+    }),
   });
   provider = reg.provider;
   log(

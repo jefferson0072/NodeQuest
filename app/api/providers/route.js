@@ -13,16 +13,16 @@ export async function POST(req) {
   if (!body.name) {
     return NextResponse.json({ error: "name required" }, { status: 400 });
   }
-  if (!body.gpuModel && !body.vramGb) {
+  if (!body.gpuRawName && !body.vramGb) {
     return NextResponse.json(
-      { error: "gpuModel or vramGb required (we assign the tier)" },
+      { error: "gpuRawName or vramGb required (from nvidia-smi)" },
       { status: 400 }
     );
   }
-  // NOTE: tier is intentionally ignored if sent. We assign it from the GPU.
+  // Tier is assigned server-side from gpuRawName + VRAM. Client gpuModel is ignored.
   const provider = await upsertProvider({
     name: body.name,
-    gpuModel: body.gpuModel,
+    gpuRawName: body.gpuRawName,
     vramGb: body.vramGb,
     wallet: body.wallet,
   });
