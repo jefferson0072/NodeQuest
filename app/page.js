@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import TokenCa from "./components/token-ca";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
           <Image src="/logo.png" alt="NodeQuest" width={34} height={34} className="brand-image" />
           <span>NodeQuest</span>
         </Link>
+        <TokenCa />
         <nav className="nav">
           <Link href="/how-it-works">How it works</Link>
           <a

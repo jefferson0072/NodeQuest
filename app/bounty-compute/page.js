@@ -13,6 +13,7 @@ import {
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import WalletProviders from "./wallet-providers";
+import TokenCa from "../components/token-ca";
 
 const TIER_LABEL = { 1: "Light", 2: "Standard", 3: "Heavy" };
 
@@ -167,6 +168,7 @@ function Dashboard() {
           <Image src="/logo.png" alt="NodeQuest" width={34} height={34} className="brand-image" />
           <span>NodeQuest</span>
         </Link>
+        <TokenCa />
         <nav className="nav">
           <Link href="/how-it-works">How it works</Link>
           <a
