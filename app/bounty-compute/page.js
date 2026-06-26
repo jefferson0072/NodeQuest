@@ -295,6 +295,17 @@ function Dashboard() {
                         <> · detected: {p.gpuRawName}</>
                       )}
                     </div>
+                    {p.wallet && (
+                      <a
+                        className="prov-wallet"
+                        href={`https://solscan.io/account/${p.wallet}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        title={p.wallet}
+                      >
+                        {shortWallet(p.wallet)}
+                      </a>
+                    )}
                   </div>
                   <RepDots rep={p.reputation} />
                 </div>
@@ -495,6 +506,11 @@ function JobCard({ job }) {
       )}
     </div>
   );
+}
+
+function shortWallet(address) {
+  if (!address || address.length < 10) return address || "";
+  return `${address.slice(0, 4)}…${address.slice(-4)}`;
 }
 
 function RepDots({ rep }) {

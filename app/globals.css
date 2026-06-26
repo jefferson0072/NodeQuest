@@ -1034,10 +1034,24 @@ button:disabled {
 .prov {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
   padding: 10px 0;
   border-bottom: 1px solid #2d2643;
+}
+
+.prov-wallet {
+  display: inline-block;
+  margin-top: 5px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11.5px;
+  color: var(--brand-2);
+  text-decoration: none;
+}
+
+.prov-wallet:hover {
+  color: var(--text);
+  text-decoration: underline;
 }
 
 .prov:last-child {
