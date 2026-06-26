@@ -8,9 +8,10 @@ Built with **Next.js (App Router)**, **Upstash Redis** for storage, and
 **Solana** for payments. No custom smart contract — the backend handles escrow,
 matchmaking, and settlement, and token transfers go through `@solana/web3.js`.
 
-> Status: **text (LLM) workloads** via Ollama. The on-chain payment path is fully
-> built but requires a deployed QST token + funded wallet to go live
-> (see [Going live](#going-live)).
+**NodeQuest token CA:** `iACepJW3vyevPBMe2CwyzLTF9Hj6nWRYW4QukqVEASY`
+
+> Status: **live** — text (LLM) workloads via Ollama, with real on-chain escrow,
+> payouts, and burns settled in QST.
 
 ---
 
